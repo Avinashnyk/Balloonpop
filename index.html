@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balloon Popping Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5271267160979118"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Forest Background -->
+  <div id="forest-background"></div>
+
+  <!-- Moving Animals -->
+  <div id="moving-animals">
+    <img src="ostrich.gif" class="animal ostrich" alt="Ostrich">
+    <img src="bird.gif" class="animal bird" alt="Bird">
+    <img src="elephant.gif" class="animal elephant" alt="Elephant">
+    
+    <img src="cheetah.gif" class="animal cheetah" alt="Cheetah" style="display: none;">
+    <img src="horse.gif" class="animal horse" alt="Horse" style="display: none;">
+  </div>
+
+  <div id="aquatic-background"></div>
+<div id="moving-fish">
+  <img src="fish1.gif" class="fish fish1" alt="Fish">
+  <img src="fish2.gif" class="fish fish2" alt="Fish">
+  <img src="fish3.gif" class="fish fish3" alt="Fish">
+</div>
+  <!-- Header with links -->
+  <header>
+    <nav>
+      <a href="#" id="how-to-play">How to Play</a>
+      <a href="#" id="leaderboard-button">Leaderboard</a>
+      <a href="#" id="about-button">About Us</a>
+      <a href="#" id="disclaimer-button">Disclaimer</a>
+    </nav>
+  </header>
+
+  <!-- Score and Wrong Pops Counter -->
+  <div id="score-board">Score: 0</div>
+  <div id="wrong-pops-board">Wrong Pops: 0/5</div>
+
+  <!-- Game Container -->
+  <div id="game-container">
+    <!-- Start Screen -->
+    <div id="start-screen">
+      <h1>Welcome to</h1>
+      <h1>Balloon Popping Game</h1>
+      <input type="text" id="player-name" placeholder="Enter your name" required>
+      <button id="new-game">New Game</button>
+    </div>
+
+   <!-- Add this right after the start-screen div -->
+  <div id="theme-screen" style="display: none;">
+      <h2>Select Your Theme</h2>
+      <button id="forest-theme">🌲 Forest Theme</button>
+    <button id="aquatic-theme">🐠 Aquatic Theme</button>
+    </div>
+
+<!-- Category Selection Screen -->
+    <div id="category-screen" style="display: none;">
+      <h2>Select Category</h2>
+      <button id="letters-button">Letters</button>
+      <button id="numbers-button">Numbers</button>
+      <button id="shapes-button">Shapes</button>
+      <button id="all-button">All</button>
+      
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" style="display: none;">
+      <div id="game-over">
+        <h2>GAME OVER!</h2>
+        <p>Your Score is <span id="final-score">0</span>!</p>
+        <button id="restart-game">New Game</button>
+      </div>
+        <div id="pause-popup">
+          <h2>Game Paused</h2>
+          <button id="resume-button">▶ Resume</button>
+      </div>
+      <div id="bottom-line"></div>
+    <p id="shapes-hint">Don't miss the Balloons!</p> <!-- New hint for Shapes category -->
+    <p id="all-hint" >Don't miss the Balloons</p>
+    <p id="letters-hint">Don't pop the numbers!</p> <!-- New hint for Letters category -->
+    <p id="numbers-hint">Don't pop the letters!</p> <!-- New hint for Numbers category -->
+    </div>
+  </div>
+
+  <!-- Leaderboard Popup -->
+  <div id="leaderboard-popup">
+    <h2>Leaderboard</h2>
+    <ol id="leaderboard-list"></ol>
+    <button id="close-leaderboard">Close</button>
+  </div>
+
+  <!-- About Us Popup -->
+<div id="about-popup" class="popup">
+  <h2>About Us</h2>
+  <p>Welcome to the Balloon Popping Game! We're a fun, educational game designed to help kids learn letters, numbers, and shapes while having a blast popping balloons.</p>
+  <p>Our mission is to make learning interactive and enjoyable for children of all ages.</p>
+  <button id="close-about">Close</button>
+</div>
+<!-- Disclaimer Popup -->
+<div id="disclaimer-popup" class="popup">
+  <h2>Disclaimer</h2>
+  <p>This game is for entertainment purposes only. We are not responsible for any misuse or unintended consequences.</p>
+  <p>Affiliate links may be present, and we may earn a small commission at no extra cost to you.</p>
+  <button id="close-disclaimer">Close</button>
+</div>
+  <!-- How to Play Popup -->
+  <div id="how-to-play-popup">
+    <h2>How to Play</h2>
+    <p>Click on the balloons to pop them! Be careful not to pop the wrong ones.</p>
+    <button id="close-how-to-play">Close</button>
+  </div>
+
+  <!-- Level Up Popup -->
+  <div id="level-up-popup">
+    <h2>Level Up!</h2>
+    <p>You've reached Level <span id="current-level">1</span>!</p>
+  </div>
+
+  <!-- Sound Toggle Button -->
+  <button id="sound-toggle">Sound: On</button>
+<!-- Pause Button-->
+ <button id="pause-button">⏸ Pause</button>
+  <!-- Audio for Background Music -->
+  <audio id="background-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+<!-- Affiliate Banner with Product Image -->
+<div id="affiliate-banner">
+  <span id="close-affiliate" class="close-btn">&times;</span>
+  <div class="affiliate-item">
+  <a href="https://amzn.to/427rqJA" target="_blank" rel="noopener noreferrer">
+    <img src="toddler-toys.jpg" alt="Toddler Toys" id="product-image"> 
+    <button>Buy Now on Amazon</button>
+  </a>
+  </div>
+<div class="affiliate-item">
+  <!-- Second Affiliate Link -->
+  <a href="https://amzn.to/4iKwABQ" target="_blank" rel="noopener noreferrer">
+    <img src="the-mom-test-book.jpg" alt="The Mom Test" class="product-image">
+    <button>Buy Now on Amazon</button>
+  </a>
+</div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

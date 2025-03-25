@@ -44,7 +44,41 @@ const closeAbout = document.getElementById('close-about');
 const disclaimerButton = document.getElementById('disclaimer-button');
 const disclaimerPopup = document.getElementById('disclaimer-popup');
 const closeDisclaimer = document.getElementById('close-disclaimer');
+//Mobile menu functionality
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
 
+// Toggle mobile menu
+mobileMenuButton.addEventListener('click', (e) => {
+  e.stopPropagation();
+  mobileMenu.classList.toggle('show');
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', () => {
+  mobileMenu.classList.remove('show');
+});
+
+// Link mobile menu buttons to their desktop counterparts
+document.getElementById('mobile-how-to-play').addEventListener('click', () => {
+  document.getElementById('how-to-play').click();
+  mobileMenu.classList.remove('show');
+});
+
+document.getElementById('mobile-leaderboard-button').addEventListener('click', () => {
+  document.getElementById('leaderboard-button').click();
+  mobileMenu.classList.remove('show');
+});
+
+document.getElementById('mobile-about-button').addEventListener('click', () => {
+  document.getElementById('about-button').click();
+  mobileMenu.classList.remove('show');
+});
+
+document.getElementById('mobile-disclaimer-button').addEventListener('click', () => {
+  document.getElementById('disclaimer-button').click();
+  mobileMenu.classList.remove('show');
+});
 disclaimerButton.addEventListener('click', () => disclaimerPopup.style.display = 'block');
 closeDisclaimer.addEventListener('click', () => disclaimerPopup.style.display = 'none');
 aboutButton.addEventListener('click', () => aboutPopup.style.display = 'block');
@@ -65,6 +99,15 @@ let animationsPaused = false;
 
 // Leaderboard data
 let leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || [];
+
+function toggleMobileMenuButton() {
+  if (gameScreen.style.display === 'block') {
+    mobileMenuButton.style.display = 'none';
+    mobileMenu.style.display = 'none';
+  } else {
+    mobileMenuButton.style.display = 'block';
+  }
+}
 
 // Function to show/hide the affiliate banner
 function toggleAffiliateBanner(show) {
@@ -513,6 +556,7 @@ function startGameWithCategory(category) {
 
   if (isSoundOn) backgroundMusic.play();
   balloonInterval = setInterval(createBalloon, 1500);
+  toggleMobileMenuButtonO();
 }
 
 // End game
@@ -545,7 +589,10 @@ function restartGame() {
 
   document.querySelectorAll('.balloon, .explosion').forEach(el => el.remove());
   updateAnimalsForLevel(1);
+  toggleMobileMenuButton();
 }
+//Initialize
+toggleMobileMenuButton();
 
 // Event listeners
 newGameButton.addEventListener('click', startGame);

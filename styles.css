@@ -988,6 +988,17 @@ button, input {
   padding: 12px 24px;
 }
 
+/* Mobile menu links styling */
+#mobile-menu a {
+  color: white; /* Change from default blue to white */
+  text-decoration: none;
+  padding: 8px 12px;
+}
+
+#mobile-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* Mobile menu button - hidden by default */
 #mobile-menu-button {
   display: none;

@@ -322,6 +322,10 @@ function updateAnimalsForLevel(level) {
 
   function handleBalloonPop(balloonElement, content) {
     if (isPaused) return;
+   // play pop sound 
+    const popSound = document.getElementById('pop-sound');
+  popSound.currentTime = 0; // Rewind to start
+  if (isSoundOn) popSound.play().catch(e => console.log("Audio play failed:", e));
     
     const balloonRect = balloonElement.getBoundingClientRect();
     createExplosion(balloonRect.left, balloonRect.top);
@@ -467,7 +471,7 @@ function createExplosion(left, top) {
 function toggleSound() {
   isSoundOn = !isSoundOn;
   if (isSoundOn) {
-    backgroundMusic.play();
+    backgroundMusic.play().catch(e => console.log("Music play failed:" ,e));
     soundToggle.textContent = 'Sound: On';
   } else {
     backgroundMusic.pause();
@@ -703,6 +707,9 @@ body.landscape #game-screen {
   // Initialize the game
 initializeLeaderboard();
 pauseButton.style.display = 'none';
+
+const popSound = document.getElementById('pop-sound');
+popSound.volume = 0.8; // Set appropriate volume (0.0 to 1.0)
 
 // Start with forest theme by default
 forestBackground.style.display = 'block';

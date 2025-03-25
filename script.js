@@ -47,6 +47,8 @@ const closeDisclaimer = document.getElementById('close-disclaimer');
 //Mobile menu functionality
 const mobileMenuButton = document.getElementById('mobile-menu-button');
 const mobileMenu = document.getElementById('mobile-menu');
+const difficultThemeButton = document.getElementById('difficult-theme');
+const difficultBackground = document.getElementById('difficult-background');
 
 // Toggle mobile menu
 mobileMenuButton.addEventListener('click', (e) => {
@@ -96,6 +98,7 @@ let isSoundOn = true;
 let isPaused = false;
 let currentTheme = 'forest'; // Tracks current theme
 let animationsPaused = false;
+let ballonsPerInterval = 2;
 
 // Leaderboard data
 let leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || [];
@@ -343,7 +346,7 @@ function updateAnimalsForLevel(level) {
 // Create balloon
 function createBalloon() {
   if (isPaused) return;
-
+  for(let i = 0; i < balloonsPerInterval; i++) {
   const balloon = document.createElement('div');
   balloon.classList.add('balloon');
 
@@ -401,7 +404,7 @@ function createBalloon() {
   }, 10);
 
   gameContainer.appendChild(balloon);
-}
+}}
 
 
 // Helper functions for balloon content
@@ -428,11 +431,18 @@ function getRandomContent() {
 function checkLevelUp() {
   if (score % 20 === 0) {
     level++;
-    gameSpeed = Math.max(1, gameSpeed - 0.5);
+    if(currentTheme === 'difficult') {
+      gameSpeed = Math.max(1, gameSpeed - 1); // Decrease by 1 second each level
+      if(level >= 3) balloonsPerInterval = 3; // After level 3, 3 balloons at once
+    } else {
+      gameSpeed = Math.max(2, gameSpeed - 0.5); // Normal theme gets slightly faster
+    }
+    
     showLevelUpPopup(level);
     updateAnimalsForLevel(level);
   }
 }
+
 
 // Show level-up popup
 function showLevelUpPopup(level) {
@@ -513,6 +523,7 @@ function selectAquaticTheme() {
   categoryScreen.style.display = 'block';
 }
 
+
 // Start game with selected category
 function startGameWithCategory(category) {
   currentCategory = category;
@@ -524,6 +535,21 @@ function startGameWithCategory(category) {
   wrongPops = 0;
   level = 1;
   gameSpeed = 5;
+  if (currentTheme === 'difficult'){
+    gameSpeed = 4;
+    balloonsPerInterval = 1;
+  } else {
+    gameSpeed = 5;
+    balloonsPerInterval = 1;
+  }
+
+
+  //Difficulty Level 	Balloons Per Interval	 Speed (seconds)
+  //Level 1                   	1	              3s
+  //Level 2	                    2              	2s
+  //Level 4+	                  3 	            1s
+
+
   scoreBoard.textContent = `Score: ${score}`;
   wrongPopsBoard.textContent = `Wrong Pops: ${wrongPops}/5`;
   gameOverDiv.style.display = 'none';
@@ -616,6 +642,21 @@ const closeAffiliateButton = document.getElementById('close-affiliate');
 closeAffiliateButton.addEventListener('click', () => {
   const affiliateBanner = document.getElementById('affiliate-banner');
   affiliateBanner.style.display = 'none';
+});
+
+difficultThemeButton.addEventListener('click', () => {
+  currentTheme = 'difficult';
+  // You might want to use a different background for difficult mode
+  forestBackground.style.display = 'none';
+  aquaticBackground.style.display = 'none';
+  movingAnimals.style.display = 'none';
+  movingFish.style.display = 'none';
+  
+  difficultBackground.style.display = 'block';
+  themeScreen.style.display = 'none';
+  categoryScreen.style.display = 'block';
+  //gameSpeed =3; faster intial speed
+  //balloonsPerInterval = 2; //multiple balloons from start
 });
 
 // Keyboard shortcut for pause

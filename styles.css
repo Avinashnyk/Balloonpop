@@ -731,6 +731,31 @@ html {
     transform: translateX(100vw);
   }
 }
+/* Add this with your other background styles */
+#difficult-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('volcano1.jpg'); /* Your image path */
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  display: none; /* Hidden by default */
+}
+
+/* Style for the difficult theme button */
+#difficult-theme {
+  background-color: #d9534f; /* Red danger color */
+  color: white;
+}
+
+#difficult-theme:hover {
+  background-color: #c12e2a;
+}
+
+
 #pause-button {
   position: fixed;
   bottom: 70px;
@@ -1007,4 +1032,12 @@ button, input {
   #mobile-menu.show {
     display: flex;
   }
+}
+#difficult-theme {
+  background-color: #d9534f; /* Red color for difficulty */
+}
+
+#difficult-theme:hover {
+  background-color: #c9302c;
+  transform: scale(1.05);
 }
